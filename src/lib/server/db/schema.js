@@ -1,7 +1,9 @@
+import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
-export const user = sqliteTable('user', {
+export const urls = sqliteTable('urls', {
 	id: integer('id').primaryKey(),
-	name: text('name').notNull(),
-	age: integer('age')
+	original_url: text('original_url').notNull(),
+	short_url: text('short_url').notNull().unique(),
+	created_at: text('timestamp').notNull().default(sql`(current_timestamp)`)
 });
